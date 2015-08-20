@@ -1,0 +1,18 @@
+{
+  "name":"grunt-master-html",
+  "version":"0.0.1",
+  "devDependencies":{
+    "grunt":"^0.4.5",
+    "lodash":"~3.10.1"
+  },
+  "keywords":[
+    "gruntplugin",
+    "grunt",
+    "masterhtml",
+    "masterify",
+    "masterpage",
+    "html",
+    "htmlgen",
+    "generate"
+  ]
+}
