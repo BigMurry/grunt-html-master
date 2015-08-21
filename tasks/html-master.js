@@ -67,7 +67,7 @@ module.exports = function (grunt) {
                 if (tag.type === 'master') {
                     frag[tag.type] = tag.name;
                 } else if(tag.type === 'fortag') {
-                    frag[tag.name] = tag.lines.join(EOL).replace(new RegExp(regexTagStart), '').replace(new RegExp(regexTagEnd), '');
+                    frag[tag.name] = tag.lines.slice(1,tag.lines.length-1).join(EOL);
                 }
             });
             return frag;
