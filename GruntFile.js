@@ -1,12 +1,15 @@
 module.exports = function(grunt){
 	grunt.initConfig({
+		destdir:'test/dist',
 		masterify:{
 			dist:{
-				src: 'test/template.html',
-				dest:'test/result.html',
+				src: ['test/pages/**/*.html'],
+				dest:'<%= destdir %>',
 				options:{
+					beautify:true,
 					masters:{
-						master1:'test/master.html'
+						master1:'test/masters/master1.html',
+						master2:'test/masters/master2.html'
 					}
 				}
 			}

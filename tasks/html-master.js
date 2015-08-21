@@ -2,6 +2,7 @@ module.exports = function (grunt) {
     var _ = require('lodash'),
         EOL = grunt.util.linefeed,
         path = require('path'),
+        beautify = require('js-beautify'),
 
     //Tags Regular Expressions
         regexTagStartTpl = "<!--\\s*%parseTag%:(\\w+)\\s*([^\\s]*)\\s*-->", // <!-- masterify:{type} {name} -->
@@ -29,16 +30,13 @@ module.exports = function (grunt) {
     }
 
     function getMasterifyTag(content, callback) {
-        grunt.log.debug('in getMasterifyTag');
         var lines = content.replace(/\r\n/g, '\n').split('\n'),
             tag = false,
             tags = [],
             last;
         lines.forEach(function (l) {
-            grunt.log.debug('in getMasterifyTag: forEach');
             var tagStart = l.match(new RegExp(regexTagStart)),
                 tagEnd = new RegExp(regexTagEnd).test(l);
-            grunt.log.debug('in getMasterifyTag: forEach.regexp');
             if (tagStart) {
                 tag = true;
                 last = {
@@ -59,16 +57,11 @@ module.exports = function (grunt) {
         if (callback && typeof callback === 'function') {
             return callback(tags);
         }
-        grunt.log.debug('out getMasterifyTag');
     }
 
     function transformContent(content, params, dest) {
-        grunt.log.debug('in transform');
         var raw = content;
         var frag = getMasterifyTag(content, function (tags) {
-
-            grunt.log.debug('in callback:');
-            console.log(tags);
             var frag = {};
             tags.forEach(function (tag) {
                 if (tag.type === 'master') {
@@ -79,17 +72,11 @@ module.exports = function (grunt) {
             });
             return frag;
         });
-        console.log(frag);
-        console.log(params);
         if (!frag['master']) {
-
-            grunt.log.debug('out transform: no transform needed.');
             return raw;
         } else {
             var masterSrc = params.masters[frag['master']];
             var masterContent = grunt.file.read(masterSrc).toString();
-
-            grunt.log.debug('out transform');
             return masterContent.replace(new RegExp(regexTagStart, 'g'), function (_, type, tag) {
                 if (type !== 'tag') {
                     return '';
@@ -103,10 +90,11 @@ module.exports = function (grunt) {
     grunt.registerMultiTask('masterify', "Grunt Master HTML - build html page skeleton by using master template", function () {
 
         var params = this.options({
+            beautify:false,
             masters: {},
             parseTag: 'masterify'
         });
-
+        grunt.log.debug('passed params: \n'+ JSON.stringify(params));
         setTagRegexes(params.parseTag);
 
         this.files.forEach(function (file) {
@@ -117,13 +105,16 @@ module.exports = function (grunt) {
                 if (isFileRegex.test(dest)) {
                     destPath = dest;
                 } else {
-                    destPath = path.join(grunt.file.read(src), path.basename(src));
+                    destPath = path.join(dest, path.basename(src));
                 }
 
-                grunt.log.ok('start transform: ' + src);
+                grunt.log.debug('start transform: ' + src);
                 content = transformContent(grunt.file.read(src), params, dest);
-                grunt.log.ok('end transform: ' + src);
+                grunt.log.debug('end transform: ' + src);
 
+                if(params.beautify){
+                    content = beautify.html(content, _.isObject(params.beautify)?params.beautity:{});
+                }
                 grunt.file.write(destPath, content);
                 grunt.log.ok('File ' + destPath + 'created!');
             });
