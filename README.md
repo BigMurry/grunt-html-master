@@ -22,9 +22,10 @@
 </html>
 
 ### page.html
-```html
-<!-- masterify:master master1 --><!-- /masterify ->
 
+```html
+
+<!-- masterify:master master1 --><!-- /masterify ->
 <!-- masterify:fortag header -->
 <div>
   <p> This is the content of header.</p>
