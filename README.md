@@ -42,7 +42,7 @@ grunt.initConfig({
 ### page.html
 
 ```html
-<!-- masterify:master master1 --><!-- /masterify ->
+<!-- masterify:master master1 --><!-- /masterify -->
 
 <!-- masterify:fortag header -->
 <div>
