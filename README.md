@@ -1,6 +1,25 @@
 ## grunt-html-master
 > build html page by using master page.
 
+### gruntfile.js
+```js
+grunt.initConfig({
+		destdir:'test/dist',
+		masterify:{
+			dist:{
+				src: ['test/pages/**/*.html'],
+				dest:'<%= destdir %>',
+				options:{
+					beautify:true,
+					masters:{
+						master1:'test/masters/master1.html',
+						master2:'test/masters/master2.html'
+					}
+				}
+			}
+		}	
+});
+```
 ### master.html
 ```html
 <!DOCTYPE html>
@@ -20,11 +39,11 @@
 </div>
 </body>
 </html>
+```
 
 ### page.html
 
 ```html
-
 <!-- masterify:master master1 --><!-- /masterify ->
 <!-- masterify:fortag header -->
 <div>
@@ -39,6 +58,7 @@
 <!-- masterify:fortag footer -->
 <p>This is the content of the footer</p>
 <!-- /masterify -->
+```
 
 ### result.html
 ```html
@@ -61,3 +81,4 @@
 </div>
 </body>
 </html>
+```
