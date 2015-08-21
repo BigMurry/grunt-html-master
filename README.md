@@ -4,16 +4,14 @@
 ### gruntfile.js
 ```js
 grunt.initConfig({
-		destdir:'test/dist',
 		masterify:{
 			dist:{
-				src: ['test/pages/**/*.html'],
-				dest:'<%= destdir %>',
+				src: 'page.html',
+				dest:'result.html',
 				options:{
 					beautify:true,
 					masters:{
-						master1:'test/masters/master1.html',
-						master2:'test/masters/master2.html'
+						master1:'master.html'
 					}
 				}
 			}
@@ -45,6 +43,7 @@ grunt.initConfig({
 
 ```html
 <!-- masterify:master master1 --><!-- /masterify ->
+
 <!-- masterify:fortag header -->
 <div>
   <p> This is the content of header.</p>
