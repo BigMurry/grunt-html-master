@@ -1,6 +1,6 @@
 {
   "name":"grunt-html-master",
-  "version":"0.0.5",
+  "version":"0.0.6",
   "description":"Grunt Master HTML - build html page skeleton by using master template",
   "homepage":"https://github.com/BigMurry/grunt-html-master.git",
   "author":{
