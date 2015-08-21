@@ -57,7 +57,7 @@ module.exports = function (grunt) {
             }
         });
         if (callback && typeof callback === 'function') {
-            callback(tags);
+            return callback(tags);
         }
         grunt.log.debug('out getMasterifyTag');
     }
@@ -79,6 +79,8 @@ module.exports = function (grunt) {
             });
             return frag;
         });
+        console.log(frag);
+        console.log(params);
         if (!frag['master']) {
 
             grunt.log.debug('out transform: no transform needed.');
