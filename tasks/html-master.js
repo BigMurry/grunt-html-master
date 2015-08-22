@@ -78,7 +78,7 @@ module.exports = function (grunt) {
             var masterSrc = params.masters[frag['master']];
             var masterContent = grunt.file.read(masterSrc).toString();
             return masterContent.replace(new RegExp(regexTagStart, 'g'), function (_, type, tag) {
-                if (type !== 'tag') {
+                if (type !== 'tag' || !frag[tag]) {
                     return '';
                 } else {
                     return frag[tag];
