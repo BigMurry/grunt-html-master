@@ -1,4 +1,6 @@
 ## grunt-html-master
+[![npm version](https://badge.fury.io/js/grunt-html-master.svg)](https://badge.fury.io/js/grunt-html-master)
+---
 > build html page by using master page.
 
 ### gruntfile.js
