@@ -1,5 +1,5 @@
 ## grunt-html-master
-[![npm version](https://badge.fury.io/js/grunt-html-master.svg)](https://badge.fury.io/js/grunt-html-master)
+[![NPM](https://nodei.co/npm/grunt-html-master.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/grunt-html-master/)
 ---
 > build html page by using master page.
 
